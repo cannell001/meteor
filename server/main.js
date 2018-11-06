@@ -6,5 +6,5 @@ Meteor.startup(function () {
   //   name: 'Vikram',
   //   score: 99
   // });
-  // console.log(Players.find().fetch());
+  console.log(Players.find().fetch());
 });
