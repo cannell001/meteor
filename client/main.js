@@ -1,33 +1,43 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import {Meteor} from 'meteor/meteor';
+import React from "react";
+import ReactDOM from "react-dom";
+import { Meteor } from "meteor/meteor";
 
-const players = [{
-  _id: '1',
-  name: 'Lauren',
-  score: 102
-}, {
-  _id: '3',
-  name: 'Andrew',
-  score: -12
-}];
+const aliens = [
+  {
+    firstName: "Ryu",
+    lastName: "Smith",
+    email: "ryu32@gmail.com",
+    longAgo: "4 Months",
+    duration: "1 month",
+    experience: "experiments",
+    color: "blue",
+    picture: [],
+    _id: 1
+  },
+  {
+    firstName: "Yoshi",
+    lastName: "Dino",
+    email: "ydino@yahoomail.com",
+    longAgo: "17 years",
+    duration: "3 days",
+    experience: "nothing",
+    color: "green",
+    picture: [],
+    _id: 2
+  }
+];
 
-const renderPlayers = function (playersList) {
-  return playersList.map(function (player) {
-    return <p key={player._id}>{player.name} has {player.score} point(s).</p>;
+const renderAliens = function(alienList) {
+  return alienList.map(function(alien) {
+    return (
+      <p key={alien._id}>
+        {alien.firstName} has a {alien.color} color.
+      </p>
+    );
   });
 };
 
-Meteor.startup(function () {
-  let title = 'Score Keep';
-  let name = 'Mike';
-  let jsx = (
-    <div>
-      <h1>{title}</h1>
-      <p>Hello {name}!</p>
-      <p>This is my second p.</p>
-      {renderPlayers(players)}
-    </div>
-  );
-  ReactDOM.render(jsx, document.getElementById('app'));
+Meteor.startup(function() {
+  let jsx = <div>{renderAliens(aliens)}</div>;
+  ReactDOM.render(jsx, document.getElementById("app"));
 });
