@@ -1,15 +1,10 @@
 import {Meteor} from 'meteor/meteor';
-import {Aliens} from './../imports/api/aliens';
+import {Players} from './../imports/api/players';
 
 Meteor.startup(function () {
-  Aliens.insert({
-      firstName: "John",
-      lastName: "Coffman",
-      email: "coff@gmail.com",
-      longAgo: "6 Months",
-      duration: "3 months",
-      experience: "tubes",
-      color: "green"
-  });
-  console.log(Aliens.find().fetch());
+  // Players.insert({
+  //   name: 'Vikram',
+  //   score: 99
+  // });
+  // console.log(Players.find().fetch());
 });

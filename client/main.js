@@ -1,43 +1,34 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import { Meteor } from "meteor/meteor";
+import React from 'react';
+import ReactDOM from 'react-dom';
+import {Meteor} from 'meteor/meteor';
+import {Tracker} from 'meteor/tracker';
 
-const aliens = [
-  {
-    firstName: "Ryu",
-    lastName: "Smith",
-    email: "ryu32@gmail.com",
-    longAgo: "4 Months",
-    duration: "1 month",
-    experience: "experiments",
-    color: "blue",
-    picture: [],
-    _id: 1
-  },
-  {
-    firstName: "Yoshi",
-    lastName: "Dino",
-    email: "ydino@yahoomail.com",
-    longAgo: "17 years",
-    duration: "3 days",
-    experience: "nothing",
-    color: "green",
-    picture: [],
-    _id: 2
-  }
-];
+import {Players} from './../imports/api/players';
 
-const renderAliens = function(aliensList) {
-  return aliensList.map(function(alien) {
-    return (
-      <p key={alien._id}>
-        {alien.name} has the color {alien.color}.
-      </p>
-    );
+const renderPlayers = function (playersList) {
+  return playersList.map(function (player) {
+    return <p key={player._id}>{player.name} has {player.score} point(s).</p>;
   });
 };
 
-Meteor.startup(function() {
-  let jsx = <div>{renderAliens(aliens)}</div>;
-  ReactDOM.render(jsx, document.getElementById("app"));
+Meteor.startup(function () {
+  Tracker.autorun(function () {
+    let players = Players.find().fetch();
+    let title = 'Score Keep';
+    let name = 'Mike';
+    let jsx = (
+      <div>
+        <h1>{title}</h1>
+        <p>Hello {name}!</p>
+        <p>This is my second p.</p>
+        {renderPlayers(players)}
+      </div>
+    );
+    ReactDOM.render(jsx, document.getElementById('app'));
+  });
+
+  Players.insert({
+    name: 'Jen',
+    score: 1
+  });
 });
